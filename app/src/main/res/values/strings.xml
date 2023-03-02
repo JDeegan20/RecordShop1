@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RecordShop</string>
+    <string name="button_addRecord">Add Record</string>
+    <string name="hint_recordTitle">Record Title</string>
 </resources>
