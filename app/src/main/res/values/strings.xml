@@ -2,4 +2,6 @@
     <string name="app_name">RecordShop</string>
     <string name="button_addRecord">Add Record</string>
     <string name="hint_recordTitle">Record Title</string>
+    <string name="hint_recordDescription">Record Description </string>
+    <string name="hint_recordGenre">Record Genre </string>
 </resources>

@@ -12,7 +12,7 @@
         android:theme="@style/Theme.RecordShop"
         tools:targetApi="31">
         <activity
-            android:name=".RecordActivity"
+            android:name=".activities.RecordActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
