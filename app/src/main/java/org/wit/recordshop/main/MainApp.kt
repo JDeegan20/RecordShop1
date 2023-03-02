@@ -12,6 +12,9 @@ class MainApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        i("Record Shop started")
+        i("Placemark started")
+        records.add(RecordModel("Record title 1", "Record description...","Record genre"))
+        records.add(RecordModel("Record title 2", "Record description...","Record genre"))
+        records.add(RecordModel("Record title 3", "Record description...","Record genre"))
     }
 }
