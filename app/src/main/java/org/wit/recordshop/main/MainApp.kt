@@ -13,8 +13,6 @@ class MainApp : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         i("Placemark started")
-        records.add(RecordModel("Record title 1", "Record description...","Record genre"))
-        records.add(RecordModel("Record title 2", "Record description...","Record genre"))
-        records.add(RecordModel("Record title 3", "Record description...","Record genre"))
+        
     }
 }

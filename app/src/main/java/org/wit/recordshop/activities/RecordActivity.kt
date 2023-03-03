@@ -37,11 +37,17 @@ class RecordActivity : AppCompatActivity() {
                 i("add Button Pressed: ${record}")
                 for (i in app!!.records.indices)
                 { i("Record[$i]:${this.app!!.records[i]}") }
+
+                setResult(RESULT_OK)
+                finish()
+
             } else {
                 Snackbar.make(it, "Please Enter a record title", Snackbar.LENGTH_LONG)
                     .show()
             }
         }
+
+
     }
 }
 
