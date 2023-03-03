@@ -6,18 +6,23 @@ import androidx.recyclerview.widget.RecyclerView
 import org.wit.recordshop.databinding.CardRecordBinding
 import org.wit.recordshop.models.RecordModel
 
-class RecordAdapter constructor(private var records: List<RecordModel>) :
+interface RecordListener {
+    fun onRecordClick(record: RecordModel)
+}
+class RecordAdapter constructor(private var records: List<RecordModel>,
+                                   private val listener: RecordListener) :
     RecyclerView.Adapter<RecordAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         val binding = CardRecordBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
+
         return MainHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val record = records[holder.adapterPosition]
-        holder.bind(record)
+        holder.bind(record, listener)
     }
 
     override fun getItemCount(): Int = records.size
@@ -25,10 +30,11 @@ class RecordAdapter constructor(private var records: List<RecordModel>) :
     class MainHolder(private val binding : CardRecordBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(record: RecordModel) {
+        fun bind(record: RecordModel, listener: RecordListener) {
             binding.recordTitle.text = record.title
             binding.description.text = record.description
-            binding.genre.text = record.genre
+            binding.root.setOnClickListener { listener.onRecordClick(record) }
         }
     }
 }
+
