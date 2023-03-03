@@ -60,6 +60,7 @@ class RecordListActivity : AppCompatActivity(), RecordListener {
 
     override fun onRecordClick(record: RecordModel) {
         val launcherIntent = Intent(this, RecordActivity::class.java)
+        launcherIntent.putExtra("record_edit", record)
         getClickResult.launch(launcherIntent)
     }
 

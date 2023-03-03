@@ -30,7 +30,12 @@ class RecordActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
-        i("Record Activity started...")
+        if (intent.hasExtra("record_edit")) {
+           record = intent.extras?.getParcelable("record_edit")!!
+            binding.recordTitle.setText(record.title)
+            binding.description.setText(record.description)
+            binding.genre.setText(record.genre)
+        }
 
         binding.btnAdd.setOnClickListener() {
             record.title = binding.recordTitle.text.toString()
