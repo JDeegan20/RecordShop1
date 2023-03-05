@@ -6,5 +6,8 @@
     <string name="hint_recordDescription">Record Description </string>
     <string name="hint_recordGenre">Record Genre </string>
     <string name="menu_cancelRecord">Cancel</string>
+    <string name="enter_record_title"> Please enter the Record Title </string>
+    <string name="save_record"> Save a Record </string>
+
 
 </resources>

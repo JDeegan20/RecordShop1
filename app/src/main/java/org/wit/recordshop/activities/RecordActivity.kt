@@ -17,6 +17,8 @@ class RecordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecordBinding
     var record = RecordModel()
     lateinit var app: MainApp
+    var edit = false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -31,26 +33,34 @@ class RecordActivity : AppCompatActivity() {
 
         app = application as MainApp
         if (intent.hasExtra("record_edit")) {
+            edit = true
            record = intent.extras?.getParcelable("record_edit")!!
             binding.recordTitle.setText(record.title)
             binding.description.setText(record.description)
             binding.genre.setText(record.genre)
+            binding.btnAdd.setText(R.string.save_record)
         }
+
 
         binding.btnAdd.setOnClickListener() {
             record.title = binding.recordTitle.text.toString()
             record.description = binding.description.text.toString()
             record.genre = binding.genre.text.toString()
-            if (record.title.isNotEmpty()) {
-                app.records.create(record.copy())
-                setResult(RESULT_OK)
-                finish()
-            } else {
-                Snackbar.make(it, "Please Enter a title", Snackbar.LENGTH_LONG)
+            if (record.title.isEmpty()) {
+                Snackbar.make(it,R.string.enter_record_title, Snackbar.LENGTH_LONG)
                     .show()
+            } else {
+                if (edit) {
+                    app.records.update(record.copy())
+                } else {
+                    app.records.create(record.copy())
+                }
             }
-
+            setResult(RESULT_OK)
+            finish()
         }
+
+
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_record, menu)
