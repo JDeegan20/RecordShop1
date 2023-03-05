@@ -6,6 +6,7 @@ import org.wit.recordshop.databinding.ActivityRecordBinding
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
 import org.wit.recordshop.R
 import org.wit.recordshop.main.MainApp
@@ -60,12 +61,19 @@ class RecordActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.chooseImage.setOnClickListener {
+            i("Select an image")
+        }
+
 
     }
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_record, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_cancel -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
 }
 
 

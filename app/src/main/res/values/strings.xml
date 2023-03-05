@@ -8,6 +8,8 @@
     <string name="menu_cancelRecord">Cancel</string>
     <string name="enter_record_title"> Please enter the Record Title </string>
     <string name="save_record"> Save a Record </string>
+    <string name="button_addImage"> Add Image </string>
+
 
 
 </resources>
