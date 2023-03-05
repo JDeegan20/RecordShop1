@@ -35,7 +35,7 @@ class RecordActivity : AppCompatActivity() {
         app = application as MainApp
         if (intent.hasExtra("record_edit")) {
             edit = true
-           record = intent.extras?.getParcelable("record_edit")!!
+            record = intent.extras?.getParcelable("record_edit")!!
             binding.recordTitle.setText(record.title)
             binding.description.setText(record.description)
             binding.genre.setText(record.genre)
@@ -48,7 +48,7 @@ class RecordActivity : AppCompatActivity() {
             record.description = binding.description.text.toString()
             record.genre = binding.genre.text.toString()
             if (record.title.isEmpty()) {
-                Snackbar.make(it,R.string.enter_record_title, Snackbar.LENGTH_LONG)
+                Snackbar.make(it, R.string.enter_record_title, Snackbar.LENGTH_LONG)
                     .show()
             } else {
                 if (edit) {
@@ -67,6 +67,7 @@ class RecordActivity : AppCompatActivity() {
 
 
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_cancel -> {
@@ -74,6 +75,7 @@ class RecordActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
 }
 
 
