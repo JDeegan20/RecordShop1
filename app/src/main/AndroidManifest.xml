@@ -5,7 +5,6 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
 
-
     <application
         android:name="org.wit.recordshop.main.MainApp"
         android:allowBackup="true"
@@ -16,12 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecordShop"
         tools:targetApi="31">
-
+        <activity
+            android:name=".RecordMapsActivity"
+            android:exported="false"
+            android:label="@string/title_activity_record_maps"
+            android:theme="@style/Theme.RecordShop.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
-
 
         <activity
             android:name=".MapActivity"
@@ -39,7 +41,6 @@
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
-
         </activity>
         <activity android:name=".activities.RecordActivity">
             <meta-data
