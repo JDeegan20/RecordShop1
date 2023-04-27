@@ -17,7 +17,7 @@ import org.wit.recordshop.R
 import org.wit.recordshop.databinding.ActivityMapBinding
 import org.wit.recordshop.models.Location
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarkerDragListener {
+class MapActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
 
     private lateinit var map: GoogleMap
@@ -44,6 +44,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarker
         map.addMarker(options)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
         map.setOnMarkerDragListener(this)
+        map.setOnMarkerClickListener(this)
     }
 
     override fun onBackPressed() {
@@ -67,6 +68,12 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarker
 
     override fun onMarkerDragStart(p0: Marker) {
         TODO("Not yet implemented")
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        val loc = LatLng(location.lat, location.lng)
+        marker.snippet = "GPS : $loc"
+        return false
     }
 
 

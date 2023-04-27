@@ -31,7 +31,7 @@ class RecordActivity : AppCompatActivity() {
     lateinit var app: MainApp
     var edit = false
 
-    var location = Location(52.245696, -7.139102, 15f)
+    //var location = Location(52.245696, -7.139102, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -80,6 +80,12 @@ class RecordActivity : AppCompatActivity() {
 
 
         binding.recordLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
+            if (record.zoom != 0f) {
+                location.lat =  record.lat
+                location.lng = record.lng
+                location.zoom = record.zoom
+            }
             val launcherIntent = Intent(this, MapActivity::class.java)
                 .putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
@@ -126,14 +132,18 @@ class RecordActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Location ${result.data.toString()}")
-                            location = result.data!!.extras?.getParcelable("location")!!
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
                             i("Location == $location")
+                           record.lat = location.lat
+                            record.lng = location.lng
+                            record.zoom = location.zoom
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
     }
+
 
 }
 

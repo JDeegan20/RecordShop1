@@ -29,6 +29,9 @@ class RecordMemStore : RecordStore {
             foundRecord.description = record.description
             foundRecord.genre = record.genre
             foundRecord.image = record.image
+            foundRecord.lat = record.lat
+            foundRecord.lng = record.lng
+            foundRecord.zoom = record.zoom
             logAll()
         }
     }
