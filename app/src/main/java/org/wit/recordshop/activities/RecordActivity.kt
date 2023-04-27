@@ -1,5 +1,6 @@
 package org.wit.recordshop.activities
 
+import android.content.Intent
 import org.wit.recordshop.databinding.ActivityRecordBinding
 
 
@@ -7,7 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
+import com.squareup.picasso.Picasso
+import org.wit.placemark.helpers.showImagePicker
 import org.wit.recordshop.R
 import org.wit.recordshop.main.MainApp
 import org.wit.recordshop.models.RecordModel
@@ -16,6 +21,11 @@ import timber.log.Timber.i
 
 class RecordActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRecordBinding
+    private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+
+
+
     var record = RecordModel()
     lateinit var app: MainApp
     var edit = false
@@ -65,6 +75,15 @@ class RecordActivity : AppCompatActivity() {
             i("Select an image")
         }
 
+        binding.recordLocation.setOnClickListener {
+            i ("Set Location Pressed")
+        }
+
+        binding.recordLocation.setOnClickListener {
+            val launcherIntent = Intent(this, MapActivity::class.java)
+            mapIntentLauncher.launch(launcherIntent)
+        }
+
 
     }
 
@@ -75,6 +94,32 @@ class RecordActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when(result.resultCode){
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+                            record.image = result.data!!.data!!
+                            Picasso.get()
+                                .load(record.image)
+                                .into(binding.recordImage)
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
+
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { i("Map Loaded") }
     }
 }
 

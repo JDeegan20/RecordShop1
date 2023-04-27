@@ -27,6 +27,8 @@ class RecordMemStore : RecordStore {
         if (foundRecord != null) {
             foundRecord.title = record.title
             foundRecord.description = record.description
+            foundRecord.genre = record.genre
+            foundRecord.image = record.image
             logAll()
         }
     }

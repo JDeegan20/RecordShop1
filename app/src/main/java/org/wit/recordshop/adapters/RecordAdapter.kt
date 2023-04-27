@@ -3,6 +3,7 @@ package org.wit.record.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import org.wit.recordshop.databinding.CardRecordBinding
 import org.wit.recordshop.models.RecordModel
 
@@ -30,11 +31,19 @@ class RecordAdapter constructor(private var records: List<RecordModel>,
     class MainHolder(private val binding : CardRecordBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+
+
         fun bind(record: RecordModel, listener: RecordListener) {
             binding.recordTitle.text = record.title
             binding.description.text = record.description
+            binding.genre.text = record.genre
+            Picasso.get().load(record.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onRecordClick(record) }
         }
+
+
+
+
     }
 }
 
