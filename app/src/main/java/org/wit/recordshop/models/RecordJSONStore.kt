@@ -4,7 +4,7 @@ import android.content.Context
 import android.net.Uri
 import com.google.gson.*
 import com.google.gson.reflect.TypeToken
-import org.wit.placemark.helpers.*
+import org.wit.recordshop.helpers.*
 import org.wit.recordshop.helpers.exists
 import org.wit.recordshop.helpers.read
 import org.wit.recordshop.helpers.write
@@ -45,8 +45,20 @@ class RecordJSONStore(private val context: Context) : RecordStore {
 
 
     override fun update(record: RecordModel) {
-        // todo
+        val recordsList = findAll() as ArrayList<RecordModel>
+        var foundRecord: RecordModel? = recordsList.find { p -> p.id == record.id }
+        if (foundRecord != null) {
+            foundRecord.title = record.title
+            foundRecord.description = record.description
+            foundRecord.genre = record.genre
+            foundRecord.image = record.image
+            foundRecord.lat = record.lat
+            foundRecord.lng = record.lng
+            foundRecord.zoom = record.zoom
+        }
+        serialize()
     }
+
 
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(records, listType)
