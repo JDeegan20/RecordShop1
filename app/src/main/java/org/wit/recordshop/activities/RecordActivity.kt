@@ -98,12 +98,21 @@ class RecordActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item_cancel -> {
+            R.id.item_delete -> {
+                setResult(99)
+                app.records.delete(record)
                 finish()
-            }
+            }        R.id.item_cancel -> { finish() }
         }
         return super.onOptionsItemSelected(item)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_record, menu)
+        if (edit) menu.getItem(0).isVisible = true
+        return super.onCreateOptionsMenu(menu)
+    }
+
 
     private fun registerImagePickerCallback() {
         imageIntentLauncher =

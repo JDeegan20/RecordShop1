@@ -1,4 +1,4 @@
-package org.wit.record.adapters
+package org.wit.recordshop.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,8 +8,9 @@ import org.wit.recordshop.databinding.CardRecordBinding
 import org.wit.recordshop.models.RecordModel
 
 interface RecordListener {
-    fun onRecordClick(record: RecordModel)
+    fun onRecordClick(record: RecordModel, position : Int)
 }
+
 class RecordAdapter constructor(private var records: List<RecordModel>,
                                    private val listener: RecordListener) :
     RecyclerView.Adapter<RecordAdapter.MainHolder>() {
@@ -38,8 +39,9 @@ class RecordAdapter constructor(private var records: List<RecordModel>,
             binding.description.text = record.description
             binding.genre.text = record.genre
             Picasso.get().load(record.image).resize(200,200).into(binding.imageIcon)
-            binding.root.setOnClickListener { listener.onRecordClick(record) }
+            binding.root.setOnClickListener { listener.onRecordClick(record,adapterPosition) }
         }
+
 
 
 

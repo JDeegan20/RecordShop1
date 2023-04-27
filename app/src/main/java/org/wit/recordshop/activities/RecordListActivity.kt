@@ -8,8 +8,8 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.wit.record.adapters.RecordAdapter
-import org.wit.record.adapters.RecordListener
+import org.wit.recordshop.adapters.RecordAdapter
+import org.wit.recordshop.adapters.RecordListener
 import org.wit.recordshop.R
 import org.wit.recordshop.databinding.ActivityRecordListBinding
 import org.wit.recordshop.main.MainApp
@@ -20,6 +20,9 @@ class RecordListActivity : AppCompatActivity(), RecordListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityRecordListBinding
+
+    private var position: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,9 +61,10 @@ class RecordListActivity : AppCompatActivity(), RecordListener {
             }
         }
 
-    override fun onRecordClick(record: RecordModel) {
+    override fun onRecordClick(record: RecordModel, pos : Int) {
         val launcherIntent = Intent(this, RecordActivity::class.java)
         launcherIntent.putExtra("record_edit", record)
+        position = pos
         getClickResult.launch(launcherIntent)
     }
 
@@ -72,7 +76,10 @@ class RecordListActivity : AppCompatActivity(), RecordListener {
                 (binding.recyclerView.adapter)?.
                 notifyItemRangeChanged(0,app.records.findAll().size)
             }
+            else // Deleting
+                if (it.resultCode == 99)     (binding.recyclerView.adapter)?.notifyItemRemoved(position)
         }
+
 
 
 
