@@ -12,7 +12,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
-import org.wit.placemark.helpers.showImagePicker
+import org.wit.recordshop.helpers.showImagePicker
 import org.wit.recordshop.R
 import org.wit.recordshop.main.MainApp
 import org.wit.recordshop.models.Location
@@ -74,8 +74,9 @@ class RecordActivity : AppCompatActivity() {
         }
 
         binding.chooseImage.setOnClickListener {
-            i("Select an image")
+            showImagePicker(imageIntentLauncher,this)
         }
+
 
 
 
@@ -112,16 +113,23 @@ class RecordActivity : AppCompatActivity() {
                     RESULT_OK -> {
                         if (result.data != null) {
                             i("Got Result ${result.data!!.data}")
-                            record.image = result.data!!.data!!
+
+                            val image = result.data!!.data!!
+                            contentResolver.takePersistableUriPermission(image,
+                                Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                           record.image = image
+
                             Picasso.get()
                                 .load(record.image)
                                 .into(binding.recordImage)
+                            binding.chooseImage.setText(R.string.change_record_image)
                         } // end of if
                     }
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
     }
+
 
 
     private fun registerMapCallback() {
