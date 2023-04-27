@@ -45,7 +45,7 @@ class RecordListActivity : AppCompatActivity(), RecordListener {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> {
-                val launcherIntent = Intent(this, RecordActivity::class.java)
+                val launcherIntent = Intent(this, RecordView::class.java)
                 getResult.launch(launcherIntent)
             }
             R.id.item_map -> {
@@ -68,7 +68,7 @@ class RecordListActivity : AppCompatActivity(), RecordListener {
         }
 
     override fun onRecordClick(record: RecordModel, pos : Int) {
-        val launcherIntent = Intent(this, RecordActivity::class.java)
+        val launcherIntent = Intent(this, RecordView::class.java)
         launcherIntent.putExtra("record_edit", record)
         position = pos
         getClickResult.launch(launcherIntent)
