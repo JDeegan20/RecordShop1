@@ -7,6 +7,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.squareup.picasso.Picasso
 
 
 import org.wit.recordshop.databinding.ActivityRecordMapsBinding
@@ -80,8 +81,12 @@ class RecordMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener 
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        contentBinding.currentTitle.text = marker.title
-
+        val tag = marker.tag as Long
+        val record = app.records.findById(tag)
+        contentBinding.currentTitle.text = record!!.title
+        contentBinding.currentDescription.text = record.description
+        contentBinding.currentGenre.text = record.genre
+        Picasso.get().load(record.image).into(contentBinding.currentImage)
         return false
     }
 }

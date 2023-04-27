@@ -8,4 +8,9 @@ interface RecordStore {
     fun delete(record: RecordModel)
 
 
+    fun findById(id:Long) : RecordModel?
+
+
+
+
 }

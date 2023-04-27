@@ -44,4 +44,10 @@ class RecordMemStore : RecordStore {
     private fun logAll() {
         records.forEach { i("$it") }
     }
+
+    override fun findById(id:Long) : RecordModel? {
+        val foundRecord: RecordModel? = records.find { it.id == id }
+        return foundRecord
+    }
+
 }
