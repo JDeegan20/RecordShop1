@@ -60,6 +60,12 @@ class RecordJSONStore(private val context: Context) : RecordStore {
     }
 
 
+    override fun delete(record: RecordModel) {
+        records.remove(record)
+        serialize()
+    }
+
+
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(records, listType)
         write(context, JSON_FILE, jsonString)

@@ -5,4 +5,7 @@ interface RecordStore {
     fun create(record: RecordModel)
     fun update(record: RecordModel)
 
+    fun delete(record: RecordModel)
+
+
 }

@@ -36,6 +36,11 @@ class RecordMemStore : RecordStore {
         }
     }
 
+    override fun delete(record: RecordModel) {
+        records.remove(record)
+    }
+
+
     private fun logAll() {
         records.forEach { i("$it") }
     }
