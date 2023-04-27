@@ -1,15 +1,15 @@
-package org.wit.record.activities
+package org.wit.recordshop.activities
 
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import org.wit.record.R
-import org.wit.record.adapters.RecordAdapter
-import org.wit.record.databinding.ActivityRecordListBinding
-import org.wit.record.main.MainApp
-import org.wit.record.models.RecordModel
+import org.wit.recordshop.R
+import org.wit.recordshop.adapters.RecordAdapter
+import org.wit.recordshop.databinding.ActivityRecordListBinding
+import org.wit.recordshop.main.MainApp
+import org.wit.recordshop.models.RecordModel
 import org.wit.recordshop.adapters.RecordListener
 
 class RecordListView : AppCompatActivity(), RecordListener {

@@ -17,7 +17,7 @@ import org.wit.recordshop.R
 import org.wit.recordshop.databinding.ActivityMapBinding
 import org.wit.recordshop.models.Location
 
-class MapActivity : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
+class EditLocationView : AppCompatActivity(), OnMapReadyCallback,  GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
 
     private lateinit var map: GoogleMap

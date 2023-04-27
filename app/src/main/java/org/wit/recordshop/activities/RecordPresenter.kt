@@ -10,7 +10,6 @@ import org.wit.recordshop.helpers.showImagePicker
 import org.wit.recordshop.main.MainApp
 import org.wit.recordshop.models.Location
 import org.wit.recordshop.models.RecordModel
-import org.wit.recordshop.showImagePicker
 import timber.log.Timber
 
 class RecordPresenter(private val view: RecordView) {
@@ -21,6 +20,8 @@ class RecordPresenter(private val view: RecordView) {
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     var edit = false;
+
+
 
     init {
         if (view.intent.hasExtra("record_edit")) {
@@ -59,9 +60,10 @@ class RecordPresenter(private val view: RecordView) {
             location.lng = record.lng
             location.zoom = record.zoom
         }
-        val launcherIntent = Intent(view,MapActivity::class.java)
+        val launcherIntent = Intent(view,EditLocationView::class.java)
             .putExtra("location", location)
         mapIntentLauncher.launch(launcherIntent)
+
     }
     fun cacheRecord (title: String, description: String, genre: String) {
         record.title = title;
