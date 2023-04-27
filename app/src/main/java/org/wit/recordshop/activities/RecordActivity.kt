@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso
 import org.wit.placemark.helpers.showImagePicker
 import org.wit.recordshop.R
 import org.wit.recordshop.main.MainApp
+import org.wit.recordshop.models.Location
 import org.wit.recordshop.models.RecordModel
 //import timber.log.Timber
 import timber.log.Timber.i
@@ -30,6 +31,7 @@ class RecordActivity : AppCompatActivity() {
     lateinit var app: MainApp
     var edit = false
 
+    var location = Location(52.245696, -7.139102, 15f)
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -75,14 +77,14 @@ class RecordActivity : AppCompatActivity() {
             i("Select an image")
         }
 
-        binding.recordLocation.setOnClickListener {
-            i ("Set Location Pressed")
-        }
+
 
         binding.recordLocation.setOnClickListener {
             val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
             mapIntentLauncher.launch(launcherIntent)
         }
+
 
 
     }
@@ -119,8 +121,20 @@ class RecordActivity : AppCompatActivity() {
     private fun registerMapCallback() {
         mapIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { i("Map Loaded") }
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            location = result.data!!.extras?.getParcelable("location")!!
+                            i("Location == $location")
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
     }
+
 }
 
 
